@@ -1,43 +1,10 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Ball Room</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
+<html lang="en">
+  <%= render 'layouts/head' %>
   <body>
-    <header>
-      <div class="header-logo">
-        <%= link_to("BallRoom", "/") %>
-      </div>
-      <ul class="header-menus">
-        <li>
-          <%= link_to("BallRoomとは", "/about") %>
-        </li>
-        <li>
-          <%= link_to("投稿一覧", "/posts/index") %>
-        </li>
-        <li>
-          <%= link_to("新規投稿", "/posts/new") %>
-        </li>
-        <li>
-          <%= link_to("ユーザー一覧", "/users/index") %>
-        </li>
-        <li>
-          <%= link_to("新規登録", "/signup") %>
-        </li>
-      </ul>
-    </header>
-
-    <% if flash[:notice] %>
-      <div class="flash">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-    
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/notice'%>
     <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
