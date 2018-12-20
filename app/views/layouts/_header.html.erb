@@ -3,20 +3,16 @@
     <%= link_to("BallRoom", "/") %>
   </div>
   <ul class="header-menus">
-    <li>
-      <%= link_to("BallRoomとは", about_path) %>
-    </li>
-    <li>
-      <%= link_to("投稿一覧", posts_path) %>
-    </li>
-    <li>
-      <%= link_to("新規投稿", new_post_path) %>
-    </li>
-    <li>
-      <%= link_to("ユーザー一覧", users_path) %>
-    </li>
-    <li>
-      <%= link_to("新規登録", signup_path) %>
-    </li>
+    <li><%= link_to("BallRoomとは", about_path) %></li>
+    <li><%= link_to("投稿一覧", posts_path) %></li>
+    <li><%= link_to("ユーザー一覧", users_path) %></li>
+    <% if logged_in? %>
+      <li><%= link_to "新規投稿", new_post_path %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+      <li><%= link_to "マイページ", user_path(current_user) %></li>
+    <% else %>
+      <li><%= link_to("ログイン", login_path) %></li>
+      <li><%= link_to("新規登録", signup_path) %></li>
+    <% end %>
   </ul>
 </header>
