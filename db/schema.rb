@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180429213833) do
+<<<<<<< Updated upstream
+ActiveRecord::Schema.define(version: 20181220130001) do
+=======
+ActiveRecord::Schema.define(version: 20190110042854) do
+>>>>>>> Stashed changes
 
   create_table "posts", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< Updated upstream
+=======
+    t.integer "user_id"
+>>>>>>> Stashed changes
   end
 
   create_table "users", force: :cascade do |t|
@@ -23,6 +31,10 @@ ActiveRecord::Schema.define(version: 20180429213833) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "sex"
+    t.integer "age"
+    t.boolean "admin", default: false
   end
 
 end

@@ -8,13 +8,27 @@
             <%= message %>
           </div>
         <% end %>
-        
-        <%= form_tag("/users/create") do %>
-          <p>ユーザー名</p>
-          <input name="name" value="<%= @user.name %>">
-          <p>メールアドレス</p>
-          <input name="email" value="<%= @user.email %>">
-          <input type="submit" value="新規登録">
+
+        <%= form_with model: @user, local: true do |f| %>
+          <%= f.label :名前 %>
+          <%= f.text_field :name %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+
+          <%= f.label :性別 %><br>
+          <%= f.select :sex, {男: "male", 女: "female"} %><br>
+
+          <%= f.label :年齢 %>
+          <%= f.number_field :age, in: 10..100 %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+
+          <%= f.label :password_confirmation, "確認用password" %>
+          <%= f.password_field :password_confirmation %>
+
+          <%= f.submit "登録する" %>
         <% end %>
       </div>
     </div>

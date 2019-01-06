@@ -8,13 +8,21 @@
             <%= message %>
           </div>
         <% end %>
-        
-        <%= form_tag("/users/#{@user.id}/update") do %>
-          <p>ユーザー名</p>
-          <input name="name" value="<%= @user.name %>">
-          <p>メールアドレス</p>
-          <input name="email" value="<%= @user.email %>">
-          <input type="submit" value="保存">
+
+        <%= form_with model: @user, local: true do |f| %>
+         <%= f.label :名前 %>
+          <%= f.text_field :name %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+
+          <%= f.label :性別 %><br>
+          <%= f.select :sex, {男: "male", 女: "female"} %><br>
+
+          <%= f.label :年齢 %>
+          <%= f.number_field :age, in: 10..100 %>
+
+          <%= f.submit "変更する" %>
         <% end %>
       </div>
     </div>
