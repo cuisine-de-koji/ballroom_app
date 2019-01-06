@@ -3,19 +3,29 @@
     <div class="form-heading">新規ユーザー登録</div>
     <div class="form users-form">
       <div class="form-body">
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
 
         <%= form_with model: @user, local: true do |f| %>
-        <%= render 'shared/error_messages' %>
-          <%= f.label :name %>
+          <%= f.label :名前 %>
           <%= f.text_field :name %>
 
           <%= f.label :email %>
           <%= f.email_field :email %>
 
+          <%= f.label :性別 %><br>
+          <%= f.select :sex, {男: "male", 女: "female"} %><br>
+
+          <%= f.label :年齢 %>
+          <%= f.number_field :age, in: 10..100 %>
+
           <%= f.label :password %>
           <%= f.password_field :password %>
 
-          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.label :password_confirmation, "確認用password" %>
           <%= f.password_field :password_confirmation %>
 
           <%= f.submit "登録する" %>
