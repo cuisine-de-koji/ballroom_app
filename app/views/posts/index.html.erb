@@ -1,5 +1,6 @@
 <div class="main posts-index">
   <div class="container">
+   <%= h(flash[:notice]) %>
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <strong><%= link_to post.user.name, post.user %></strong>
