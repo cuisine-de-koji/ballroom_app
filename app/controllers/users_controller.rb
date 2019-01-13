@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
+
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def show
     @user = User.find_by(id: params[:id])
+    @posts = @user.posts.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new
@@ -46,11 +49,25 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :sex, :age)
     end
 
+<<<<<<< Updated upstream
     # ログイン済みユーザーかどうか確認
     def logged_in_user
       unless logged_in?
         flash[:danger] = "Please log in."
         redirect_to login_path
       end
+=======
+
+
+    # 正しいユーザーかどうか確認
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
+    # 渡されたユーザーがログイン済みユーザーであれば true を返す
+    def current_user?(user)
+      user == current_user
+>>>>>>> Stashed changes
     end
 end

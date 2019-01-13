@@ -7,5 +7,12 @@
       <p>年齢:   <%= @user.age %></p>
       <h5><%= link_to("編集", "/users/#{@user.id}/edit") %></h5>
     </div>
+    <div class="posts-index">
+      <% if @user.posts.any? %>
+        <h3>posts (<%= @user.posts.count %>)</h3>
+          <%= render @posts %>
+        <%= will_paginate @posts %>
+      <% end %>
+    </div>
   </div>
 </div>
