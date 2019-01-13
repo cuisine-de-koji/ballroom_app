@@ -49,14 +49,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :sex, :age)
     end
 
-<<<<<<< Updated upstream
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to login_path
-      end
-=======
 
 
     # 正しいユーザーかどうか確認
@@ -68,6 +60,5 @@ class UsersController < ApplicationController
     # 渡されたユーザーがログイン済みユーザーであれば true を返す
     def current_user?(user)
       user == current_user
->>>>>>> Stashed changes
     end
 end

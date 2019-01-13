@@ -9,9 +9,14 @@
       </div>
       <div class="post-menus">
         <%= link_to("編集", "/posts/#{@post.id}/edit") %>
- <%= link_to "削除", @post, method: :delete,
-data: { confirm: "You sure?" } %>
+        <%= link_to "削除", @post, method: :delete,
+        data: { confirm: "You sure?" } %>
       </div>
+      <% @messages.each_with_index do |message , idx| %>
+        <p>
+          <%= idx + 1 %>. <%= message.name %> : <%= message.body %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

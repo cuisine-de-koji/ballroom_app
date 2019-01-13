@@ -7,7 +7,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
+    @messages = Message.where(post_id: params[:id])
   end
 
   def new
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     if @post.destroy
       flash[:notice] = "投稿を削除しました"
-      redirect_to　users_path
+      redirect_to　user_path
     else
       flash.now[:notice] = "削除する権限がありません"
       render action: "index"
