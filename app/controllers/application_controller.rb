@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  include MessagesHelper
 
   private
   # ログイン済みユーザーかどうか確認

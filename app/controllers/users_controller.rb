@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     # 正しいユーザーかどうか確認
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to "/" unless current_user?(@user)
     end
 
     # 渡されたユーザーがログイン済みユーザーであれば true を返す
