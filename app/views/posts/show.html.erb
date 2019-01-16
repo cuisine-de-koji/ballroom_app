@@ -4,13 +4,45 @@
       <p>
         <%= @post.content %>
       </p>
-      <div class="post-time">
+      <div class="post">
         <%= @post.created_at %>
+        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to "削除", @post, method: :delete,
+        data: { confirm: "You sure?" } %>
       </div>
-      <div class="post-menus">
-        <%= link_to("編集", "/posts/#{@post.id}/edit") %>
- <%= link_to "削除", @post, method: :delete,
-data: { confirm: "You sure?" } %>
+
+      <div>
+        <% @messages.each_with_index do |message , idx| %>
+          <p>
+            <%= idx + 1 %>. <%= message.name %> : <%= message.body %>
+
+            <%= link_to "削除", "/messages/#{message.id}", method: :delete,
+            data: { confirm: "You sure?" } %>
+
+          </p>
+        <% end %>
+      </div>
+
+      <div class="form">
+        <div class="form-body">
+          <% if false %>
+          <div class="form-error">
+            <% @message.errors.full_messages.each do |m| %>
+              <%= m %>
+            <% end %>
+          </div>
+          <% end %>
+          <h3>新規書き込み</h3>
+          <%= form_for @newmessage, url: messages_path, local: true do |form| %>
+            <%= form.label :名前 %>
+            <%= form.text_field :name %>
+            <%= form.label :書き込み %>
+            <%= form.text_area :body %>
+            <%= form.hidden_field :post_id %>
+
+            <%= form.submit %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

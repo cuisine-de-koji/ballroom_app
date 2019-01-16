@@ -7,7 +7,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
+    @newmessage = Message.new(:post_id => params[:id])
+    @messages = Message.where(post_id: params[:id])
   end
 
   def new
@@ -20,7 +22,7 @@ class PostsController < ApplicationController
       flash[:notice] = "投稿を作成しました"
       redirect_to posts_path
     else
-      render new_post_path
+      render 'posts/new'
     end
   end
 
@@ -43,11 +45,10 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     if @post.destroy
       flash[:notice] = "投稿を削除しました"
-      redirect_to　users_path
+      redirect_to　user_path
     else
-      flash.now[:notice] = "削除する権限がありません"
-      render action: "index"
-
+      flash[:alert] = "Some errors occured"
+      render "index"
     end
   end
 
@@ -56,6 +57,7 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:content)
     end
+
 
     def correct_user
       @post = Post.find_by(id: params[:id])

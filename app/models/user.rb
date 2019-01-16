@@ -8,8 +8,6 @@ class User < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX }
   has_secure_password
   validates :password, presence: true, length: { minimum: 3 }
-<<<<<<< Updated upstream
-=======
   has_many :posts, dependent: :destroy
 
   # 渡された文字列のハッシュ値を返す
@@ -18,5 +16,4 @@ class User < ApplicationRecord
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
->>>>>>> Stashed changes
 end
